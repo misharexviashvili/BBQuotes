@@ -10,6 +10,8 @@ import SwiftUI
 struct QuoteView: View {
     let vm = ViewModel()
     let show: String
+    
+    @State var showCharacterInfo = false
 
     var body: some View {
         GeometryReader {
@@ -24,8 +26,10 @@ struct QuoteView: View {
                     switch vm.status {
                     case .notStarted:
                         EmptyView()
+                        
                     case .fetching:
                         ProgressView()
+                        
                     case .success:
                         Text("\"\(vm.quote.quote)\"")
                             .minimumScaleFactor(0.5)
@@ -54,6 +58,10 @@ struct QuoteView: View {
                         }
                         .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
                         .clipShape(.rect(cornerRadius: 50))
+                        .onTapGesture {
+                            showCharacterInfo.toggle()
+                        }
+                        
                     case .failed(let error):
                         Text(error.localizedDescription)
                     }
@@ -79,6 +87,9 @@ struct QuoteView: View {
             .frame(width: geo.size.width, height: geo.size.height)
         }
         .ignoresSafeArea()
+        .sheet(isPresented: $showCharacterInfo){
+            CharacterView(character: vm.character, show: show)
+        }
     }
 }
 
