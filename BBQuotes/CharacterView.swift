@@ -66,17 +66,38 @@ struct CharacterView: View {
                             }
                         } else {
                             Text("None")
-                            .font(.subheadline)
+                                .font(.subheadline)
                         }
                         
                         Divider()
+                        DisclosureGroup("Status (spoiler alert:)!"){
+                            VStack(alignment: .leading){
+                                Text(character.status)
+                                    .font(.title2)
+                                if let death = character.death {
+                                    AsyncImage(url: death.image) { image in
+                                        image
+                                            .resizable()
+                                            .scaledToFit()
+                                            .clipShape(.rect(cornerRadius: 15))
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
+                                    Text("How: \(death.details)")
+                                    Text("Last Words: \"\(death.lastWords ?? "")\"")
+                                        .padding(.bottom, 7)
+                                }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .tint(.primary)
                         
                         
-                            
                     }
                     .frame(width: geo.size.width / 1.25, alignment: .leading)
-                   
-
+                    .padding(.bottom, 50)
+                    
+                    
                 }
                 .scrollIndicators(.hidden)
             }
