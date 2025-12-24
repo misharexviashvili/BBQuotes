@@ -76,9 +76,9 @@ struct QuoteView: View {
                             .font(.title)
                             .foregroundStyle(.white)
                             .padding()
-                            .background(show == "Breaking Bad" ? .breakingBadButton : show == "Better Call Saul" ? .betterCallSaulButton : .elCaminoButton)
+                            .background(Color("\(show.replacingOccurrences(of: " ", with: ""))Button"))
                             .clipShape(.rect(cornerRadius: 7))
-                            .shadow(color: show == "Breaking Bad" ? .breakingBadShadow : show == "Better Call Saul" ? .betterCallSaulShadow : .elCaminoShadow, radius: 2)
+                            .shadow(color: Color("\(show.replacingOccurrences(of: " ", with : ""))Shadow"), radius: 2)
                     }
                     Spacer(minLength: 95)
                 }
