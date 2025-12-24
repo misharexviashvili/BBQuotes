@@ -17,7 +17,7 @@ struct QuoteView: View {
         GeometryReader {
             geo in
             ZStack {
-                Image(show.lowercased().replacingOccurrences(of: " ", with: ""))
+                Image(show.removeCaseAndSpaces())
                     .resizable()
                     .frame(width: geo.size.width * 2.5, height: geo.size.height * 1.2)
                 VStack {
@@ -76,9 +76,9 @@ struct QuoteView: View {
                             .font(.title)
                             .foregroundStyle(.white)
                             .padding()
-                            .background(Color("\(show.replacingOccurrences(of: " ", with: ""))Button"))
+                            .background(Color("\(show.removeSpaces())Button"))
                             .clipShape(.rect(cornerRadius: 7))
-                            .shadow(color: Color("\(show.replacingOccurrences(of: " ", with : ""))Shadow"), radius: 2)
+                            .shadow(color: Color("\(show.removeSpaces()))Shadow"), radius: 2)
                     }
                     Spacer(minLength: 95)
                 }
@@ -87,6 +87,7 @@ struct QuoteView: View {
             .frame(width: geo.size.width, height: geo.size.height)
         }
         .ignoresSafeArea()
+        .toolbarBackgroundVisibility(.visible, for: .tabBar)
         .sheet(isPresented: $showCharacterInfo){
             CharacterView(character: vm.character, show: show)
         }
@@ -94,6 +95,6 @@ struct QuoteView: View {
 }
 
 #Preview {
-    QuoteView(show: "Breaking Bad")
+    QuoteView(show: Constants.bbName)
         .preferredColorScheme(.dark)
 }
