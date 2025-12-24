@@ -76,9 +76,9 @@ struct QuoteView: View {
                             .font(.title)
                             .foregroundStyle(.white)
                             .padding()
-                            .background(show == "Breaking Bad" ? .breakingBadButton : .betterCallSaulButton)
+                            .background(show == "Breaking Bad" ? .breakingBadButton : show == "Better Call Saul" ? .betterCallSaulButton : .elCaminoButton)
                             .clipShape(.rect(cornerRadius: 7))
-                            .shadow(color: show == "Breaking Bad" ? .breakingBadShadow : .betterCallSaulShadow, radius: 2)
+                            .shadow(color: show == "Breaking Bad" ? .breakingBadShadow : show == "Better Call Saul" ? .betterCallSaulShadow : .elCaminoShadow, radius: 2)
                     }
                     Spacer(minLength: 95)
                 }
